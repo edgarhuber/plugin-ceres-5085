@@ -6,11 +6,11 @@
 {% set basketTotalsCurrency = totals.currency %}
 
 <div class="row">
-    <div class="col-md-6 mb-4">
-        <div class="card small">
+    <div class="col-lg-6">
+        <div class="card small mb-lg-0">
             <!-- ORDER -->
             <div class="card-header">
-                <h5>{{ trans("Ceres::Template.orderConfirmationOrderId") }} {{ orderData.order.id }}</h5>
+                <h5 class="mb-0">{{ trans("Ceres::Template.orderConfirmationOrderId") }} {{ orderData.order.id }}</h5>
             </div>
             <div class="card-body">
                 <div class="details">
@@ -143,8 +143,8 @@
 
     </div>
 
-    <div class="col-md-6">
-        <div class="confirmation-order-list">
+    <div class="col-lg-6">
+        <div class="confirmation-order-list card card-body">
             {% for item in orderData.order.orderItems %}
                 {% if item.itemVariationId > 0 and not services.order.containsComponentPrefix(item.orderItemName) %}
                     {% set currentVariationId = item.itemVariationId | trimNewlines %}
