@@ -1,0 +1,88 @@
+<!-- SSR:template(privacy-settings) -->
+<script type="x/template" data-component="privacy-settings">
+    <div class="privacy-settings d-flex flex-column card rounded-sm mb-2-rem">
+        <div class="privacy-settings-body overflow-auto p-1-rem pt-0 rounded-sm text-small">
+            <div class="card consent-group rounded-sm mb-0 mt-1-rem" :class="{cardClass, 'mb-0': index < consentGroup.length - 1}" :style="cardStyle" v-for="(consentGroup, index) in consentGroups">
+                <div class="p-1-rem mb-0" @click.stop="toggleConsent(consentGroup.key + '.*')">
+                    <p class="card-title h6 d-flex">
+                      <span class="flex-fill">
+          							<template v-if="consentGroup.label.length > 0">
+          									${ consentGroup.label }
+          							</template>
+          							<template v-else>
+          									${ $translate("Ceres::Template.privacySettingsDefaultGroup") }
+          							</template>
+                      </span>
+                        <span class="custom-control custom-switch custom-switch-right custom-control-appearance" v-if="!consentGroup.necessary">
+                              <input type="checkbox"
+                                     class="custom-control-input"
+                                     :checked="isConsented(consentGroup.key + '.*')">
+                              <label class="custom-control-label"></label>
+                      </span>
+                        <span class="badge badge-primary bg-appearance" v-else></span>
+                    </p>
+                    <p class="card-text" v-if="consentGroup.description.length > 0">${ consentGroup.description }</p>
+                </div>
+                <div class="p-1-rem mt-0">
+                    <div v-if="expandedGroups[consentGroup.key]">
+                        <div v-for="consent in consentGroup.consents" class="card bg-white mb-1-rem mt-0 rounded-sm small"
+                             :class="{'active': isConsented(consentGroup.key + '.' + consent.key) || consent.necessary || consentGroup.necessary}">
+
+                            <div class="p-05-rem" @click.stop="toggleConsent(consentGroup.key + '.' + consent.key)">
+                                <p class="d-flex mb-0 font-weight-bold">
+                                    <span class="flex-fill">${ consent.label }</span>
+                                    <span v-if="!consentGroup.necessary && !consent.necessary" class="custom-control custom-switch custom-switch-right-small custom-control-appearance">
+                                              <input type="checkbox"
+                                                     class="custom-control-input"
+                                                     :checked="isConsented(consentGroup.key + '.' + consent.key)">
+                                              <label class="custom-control-label custom-control-label-small"></label>
+                                  </span>
+                                </p>
+                            </div>
+                            <table v-if="consent.provider.length > 0 || consent.description.length > 0 || consent.policyUrl.length > 0 || consent.lifespan.length > 0" class="table table-sm table-borderless mb-0 table-consent-custom">
+                                <tbody class="tbody-consent-custom">
+                                <tr class="tr-consent-custom" v-if="consent.provider.length > 0">
+                                    <td class="td-consent-custom font-weight-bold pb-0">${ $translate("Ceres::Template.privacySettingsProvider") }:</td>
+                                    <td class="td-consent-custom pt-0">${ consent.provider }</td>
+                                </tr>
+                                <tr class="tr-consent-custom" v-if="consent.description.length > 0">
+                                    <td class="td-consent-custom font-weight-bold pb-0">${ $translate("Ceres::Template.privacySettingsDescription") }:</td>
+                                    <td class="td-consent-custom pt-0">${ consent.description }</td>
+                                </tr>
+                                <tr class="tr-consent-custom" v-if="consent.policyUrl.length > 0">
+                                    <td class="td-consent-custom font-weight-bold pb-0">${ $translate("Ceres::Template.privacySettingsPolicyUrl") }:</td>
+                                    <td class="td-consent-custom pt-0">
+                                        <a class="text-primary text-appearance break-word" :href="consent.policyUrl" target="_blank">${ consent.policyUrl }</a>
+                                    </td>
+                                </tr>
+                                <tr class="tr-consent-custom" v-if="consent.lifespan.length > 0">
+                                    <td class="td-consent-custom font-weight-bold pb-0">${ $translate("Ceres::Template.privacySettingsLifespan") }:</td>
+                                    <td class="td-consent-custom pt-0">${ consent.lifespan }</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <a
+                            href="#"
+                            class="card-link text-primary text-appearance"
+                            @click="setGroupVisibility(consentGroup.key, true, $event)"
+                            v-if="!expandedGroups[consentGroup.key]"
+                            data-testing="privacy-settings-show-more-information">
+                        ${ $translate("Ceres::Template.privacySettingsMoreInformation") }
+                    </a>
+                    <a
+                            href="#"
+                            class="d-inline-block"
+                            @click="setGroupVisibility(consentGroup.key, false, $event)"
+                            v-else
+                            data-testing="privacy-settings-hide-more-information">
+                        ${ $translate("Ceres::Template.privacySettingsLessInformation") }
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- /SSR -->

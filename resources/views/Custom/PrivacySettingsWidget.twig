@@ -1,0 +1,45 @@
+{% import "Ceres::Widgets.Helper.TwigBuilder" as Twig %}
+{% import "Ceres::Widgets.Helper.WidgetHelper" as WidgetHelper %}
+
+{% set customClass = widget.settings.customClass.mobile %}
+{% set appearance = widget.settings.appearance.mobile | default("primary") %}
+{% set spacingSettings = widget.settings.spacing %}
+{% set inlinePadding   = WidgetHelper.getInlineSpacings(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set inlineMargin    = WidgetHelper.getInlineSpacings(spacingSettings, "", spacingSettings.customMargin.mobile) %}
+{% set paddingClasses  = WidgetHelper.getSpacingClasses(spacingSettings, spacingSettings.customPadding.mobile, "") %}
+{% set marginClasses   = WidgetHelper.getSpacingClasses(spacingSettings, "",spacingSettings.customMargin.mobile) %}
+
+<div class="navigation-dummy bg-primary-3"></div>
+<section class="bg-primary-3 pb-0 o-hidden">
+	  <div class="container-max layer-1">
+      <div class="row justify-content-center">
+	      <div class="col-sm-9 col-md-8 col-lg-6 col-xl-5 d-flex">
+	        <div class="card card-body mb-0">
+	          <h2 class="h5">Cookies</h2>
+            <p class="mb-2-rem text-small">Wir setzen Cookies und ähnliche Technologien ein, um unsere Website bereitzustellen und ihre Nutzung zu analysieren. Für weitere Informationen besuchen Sie unsere <a title="Zur Datenschutzerklärung gehen" href="/datenschutz" target="_blank">Daten­schutz­erklärung</a> und unser <a title="Zum Impressum gehen" href="/impressum" target="_blank">Impressum</a>.</p>
+	          <div>
+	            <div>
+                <div class="widget widget-privacy-settings widget-{{ appearance }}
+                        {% if customClass | length > 0 %} {{ customClass }}{% endif %}
+                        {% if marginClasses | length > 0 %} {{ marginClasses }}{% endif %}"
+                        {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
+                    <div class="widget-inner">
+                        <privacy-settings
+                                :consent-groups="{{ Twig.print('get_consent_groups() | json_encode') }}"
+                                {% if paddingClasses | length > 0 %} card-class="{{ paddingClasses }}"{% endif %}
+                                {% if inlinePadding | length > 0 %} card-style="{{ inlinePadding }}"{% endif %}>
+                        </privacy-settings>
+
+                        <div class="d-block mt-2-rem">
+                            <button class="btn btn-primary btn-appearance btn-block" @click="$store.commit('acceptAll')">{{ Twig.trans("Ceres::Template.cookieBarAcceptAll") }}</button>
+                            <button class="btn btn-primary btn-appearance btn-block" @click="$store.commit('storeConsents')">{{ Twig.trans("Ceres::Template.cookieBarSave") }}</button>
+                        </div>
+                    </div>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+</section>

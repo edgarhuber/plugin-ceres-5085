@@ -1,0 +1,126 @@
+<!-- SSR:template(cookie-bar) -->
+<script type="x/template" data-component="cookie-bar">
+    <!-- v-show is required to prevent CLS for ssr -->
+    <div id="cookiecustom"
+         v-show="!$ceres.isSSR"
+         class="cookie-bar"
+         :class="{
+					'out': !isVisible,
+					'card card-body bg-white shadow-lg': isVisible,
+					'fixed-bottom': !isShopBuilder || false
+				}">
+		        <div v-if="isVisible">
+		            {% set consentGroups = get_consent_groups() | json_encode %}
+
+		            <div class="row" v-show="!isExpanded" :class="classes" :style="styles">
+		                <div class="col-12 ">
+
+		                    <p class="h5">Cookies</p>
+		                    <p class="mb-2-rem text-small" v-html="text"></p>
+
+		                    <div class="card rounded-sm mb-2-rem">
+		                        <template v-for="consentGroup in consentGroups">
+                              <p class="d-flex mb-0">
+                                <span class="font-weight-bold flex-fill m-1-rem">
+              									        ${ consentGroup.label }
+                  							</span>
+              									<span v-if="consentGroup.consents.length > 0"
+                                                        class="custom-control custom-switch custom-control-appearance m-1-rem mr-0"
+                                                        :key="consentGroup.key">
+              											<input type="checkbox"
+                                                                 class="custom-control-input"
+                                                                 :id="_cid + '-group-' + consentGroup.key"
+                                                                 :disabled="consentGroup.necessary"
+                                                                 :checked="isConsented(consentGroup.key) || consentGroup.necessary"
+                                                                 @change="toggleConsent(consentGroup.key)">
+              											<label class="custom-control-label" :for="_cid + '-group-' + consentGroup.key">
+
+              											</label>
+              									</span>
+                              </p>
+                              <hr class="m-0 hr-cookies">
+                      			</template>
+
+
+                    </div>
+
+                </div>
+                <div class="button-order col-12 pt-0">
+
+                    <button
+                            class="btn btn-block btn-white border"
+                            @click.prevent.stop="isExpanded=true"
+                            data-testing="cookie-bar-show-more-information">
+                        ${ $translate("Ceres::Template.cookieBarMoreSettings") }
+                    </button>
+                    <button
+                            class="btn btn-block btn-primary"
+                            @click="acceptAll(); close()"
+                            data-testing="cookie-bar-accept-all">
+                        ${ $translate("Ceres::Template.cookieBarAcceptAll") }
+                    </button>
+                    <button
+                            v-if="showRejectAll"
+                            class="btn btn-block btn-primary"
+                            @click="denyAll(); close()"
+                            data-testing="cookie-bar-deny-all">
+                        ${ $translate("Ceres::Template.cookieBarDenyAll") }
+                    </button>
+                    <button
+                        class="btn btn-block btn-primary"
+                        @click="storeConsents(); close()"
+                        data-testing="cookie-bar-save">
+                        ${ $translate("Ceres::Template.cookieBarSave") }
+                    </button>
+                </div>
+
+            </div>
+            <div class="row" v-if="isExpanded" :class="classes" :style="styles">
+                <div class="col-12">
+                    <privacy-settings :consent-groups="consentGroups"></privacy-settings>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                    	<div class="col-12">
+                            <button
+                                    class="btn btn-block btn-white border"
+                                    data-testing="cookie-bar-hide-more-information"
+                                    @click.prevent.stop="isExpanded = false">
+                                	${ $translate("Ceres::Template.cookieBarBack") }
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <button
+                                    class="btn btn-block btn-primary mt-05"
+                                    @click="acceptAll(); close()"
+                                    data-testing="cookie-bar-expanded-accept-all">
+                                ${ $translate("Ceres::Template.cookieBarAcceptAll") }
+                            </button>
+                        </div>
+                        <div v-if="showRejectAll" class="col-12">
+                            <button
+                                    class="btn btn-block btn-primary mt-05"
+                                    @click="denyAll(); close()"
+                                    data-testing="cookie-bar-expanded-deny-all">
+                                ${ $translate("Ceres::Template.cookieBarDenyAll") }
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <button
+                                    class="btn btn-block btn-primary mt-05"
+                                    @click="storeConsents(); close()"
+                                    data-testing="cookie-bar-expanded-save">
+                                ${ $translate("Ceres::Template.cookieBarSave") }
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-else>
+            <a href="#" @click.prevent.stop="isCollapsed = false" class="btn-primary btn-sm shadow-sm">Cookies</a>
+        </div>
+    </div>
+</script>
+<!-- /SSR -->

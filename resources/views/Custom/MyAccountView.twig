@@ -1,0 +1,150 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.myAccount") %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+
+    {{ component( "Ceres::Customer.Components.AddressSelect.AddressSelect" ) }}
+    {{ component( "Ceres::MyAccount.Components.AccountSettings" ) }}
+    {{ component( "Ceres::MyAccount.Components.History" ) }}
+    {{ component( "Ceres::MyAccount.Components.BankDataSelect" ) }}
+
+    {% set userObject = services.customer.getContact() %}
+    {% set userBankData = services.contactBank.getBanksOfContact(frontend.Account.AccountContactId) %}
+    {% set isReturnActive = ceresConfig.myAccount.orderReturnActive %}
+    {% set contactHasReturns = services.customer.hasReturns() %}
+
+    {% set optionalInvoiceAddressFields = {
+        "de": ceresConfig.addresses.billingAddressShow,
+        "gb": ceresConfig.addresses.billingAddressShow_en
+        }
+    %}
+    {% set requiredInvoiceAddressFields = {
+        "de": ceresConfig.addresses.billingAddressRequire,
+        "gb": ceresConfig.addresses.billingAddressRequire_en
+        }
+    %}
+
+    {% set optionalShippingAddressFields = {
+        "de": ceresConfig.addresses.deliveryAddressShow,
+        "gb": ceresConfig.addresses.deliveryAddressShow_en
+        }
+    %}
+    {% set requiredShippingAddressFields = {
+        "de": ceresConfig.addresses.deliveryAddressRequire,
+        "gb": ceresConfig.addresses.billingAddressRequire_en
+        }
+    %}
+
+    <section class="bg-primary-3 header-inner pb-0 o-hidden first-section-custom overlay-header-start pb-7">
+    	<div class="container-max layer-1">
+    		<div class="row my-4 my-md-6 justify-content-center text-center text-light">
+    			<div data-aos="fade-up" class="col-md-9 col-lg-7 col-xl-6 pb-5 pb-md-0">
+    				<h1 class="display-3">Mein Konto</h1>
+    				<p class="lead mb-4">{% if frontend.Account.getIsAccountLoggedIn %}
+                            {% if userObject.firstName|length > 0 and userObject.lastName|length > 0 %}
+                                <span class="text-muted">{{ trans("Ceres::Template.myAccountHello", {"username": userObject.firstName ~ " " ~ userObject.lastName}) }}</span>
+                            {% else %}
+                                <span class="text-muted">{{ trans("Ceres::Template.myAccountHello", {"username": userObject.email}) }}</span>
+                            {% endif %}
+                        {% endif %}</p>
+    				<a href="#" class="btn btn-lg btn-danger" v-logout>{{ trans("Ceres::Template.myAccountLogout") }}</a>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
+    <my-account
+        :delivery-address-list="{{ services.customer.getAddresses(2) | json_encode }}"
+        :selected-delivery-address="{{ services.checkout.getDeliveryAddressId() | json_encode }}"
+        :billing-address-list="{{ services.customer.getAddresses(1) | json_encode }}"
+        :selected-billing-address="{{ services.checkout.getBillingAddressId() | json_encode }}">
+        <div class="bg-primary-3">
+            <div class="page-content myaccount container-max bg-primary-3">
+
+                <!-- ACCOUNT SETTINGS AREA -->
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 d-flex">
+                    	<div class="card card-body">
+	                        <h4>
+	                            {{ trans("Ceres::Template.myAccountSettings") }}
+	                        </h4>
+	                        <div>
+	                            <account-settings :user-data="{{ userObject | json_encode }}"></account-settings>
+	                        </div>
+	                	</div>
+                    </div>
+                </div>
+                <!-- ./ACCOUNT SETTINGS AREA -->
+
+                <!-- ADDRESS AREA -->
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 d-flex">
+                    	<div class="card card-body">
+	                        <h4>
+	                            {{ trans("Ceres::Template.myAccountInvoiceAddresses") }}
+	                        </h4>
+	                        <div class="invoice-addresses-select">
+	                            <invoice-address-select
+	                                :optional-address-fields="{{ optionalInvoiceAddressFields | json_encode }}"
+	                                :required-address-fields="{{ requiredInvoiceAddressFields | json_encode }}"
+	                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
+	                            </invoice-address-select>
+	                        </div>
+	                	</div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 d-flex">
+                    	<div class="card card-body">
+	                        <h4>
+	                            {{ trans("Ceres::Template.myAccountShippingAddresses") }}
+	                        </h4>
+	                        <div class="shipping-addresses-select">
+	                            <shipping-address-select
+	                                :optional-address-fields="{{ optionalShippingAddressFields | json_encode }}"
+	                                :required-address-fields="{{ requiredShippingAddressFields | json_encode }}"
+	                                default-salutation="{{ ceresConfig.addresses.defaultSalutation }}">
+	                            </shipping-address-select>
+	                        </div>
+	                	</div>
+                    </div>
+                </div>
+                <!-- ./ADDRESS AREA -->
+
+                <!-- BANK ACCOUNT SETTINGS AREA -->
+				<div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 d-flex">
+                    	<div class="card card-body">
+	                        <h4>
+	                            {{ trans("Ceres::Template.myAccountBankDetails") }}
+	                        </h4>
+	                        <bank-data-select template="#vue-bank-data-select" :user-bank-data="{{ userBankData }}" contact-id="{{ frontend.Account.AccountContactId }}"></bank-data-select>
+						</div>
+                    </div>
+                </div>
+                <!-- ./BANK ACCOUNT SETTINGS AREA -->
+
+            </div>
+
+            {% set ordersPerPage = config("Ceres.my_account.orders_per_page") %}
+            {% if not (ordersPerPage matches '/^\\d+$/') %}
+                {# config value is not a valid number #}
+                {% set ordersPerPage = 5 %}
+            {% endif %}
+
+            <!-- HISTORY -->
+            <history template="#vue-history"
+                    :orders-per-page="{{ ordersPerPage }}"
+                    :is-return-active="{{ isReturnActive | json_encode }}"
+                    :contact-has-returns="{{ contactHasReturns | json_encode }}">
+            </history>
+            <!-- ./HISTORY -->
+        </div>
+    </my-account>
+
+{% endblock %}

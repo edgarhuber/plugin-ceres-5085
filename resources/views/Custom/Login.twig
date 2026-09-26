@@ -1,0 +1,39 @@
+{% extends getPartial('page-design') %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title trans("Ceres::Template.login") %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+<section class="bg-primary-3 pb-0 overlay-header-start">
+	<div class="navigation-dummy bg-primary-3"></div>
+	<div class="container-max layer-1">
+		<div class="row justify-content-center">
+			<div data-aos="fade-up" class="col-md-8 col-lg-6 d-flex">
+				<div class="card card-body border-0 p-1-rem mb-0">
+					<div class="mt-xl-4 mt-3 mb-3 mb-xl-4">
+						<div class="text-center mb-4">
+							<h6 class="h3 mb-1">Willkommen zurück</h6>
+							<span>Mit Nutzerkonto anmelden</span>
+						</div>
+						<div>
+							<login-view
+						            backlink="{{ request.get("backlink") | default("") }}"
+						            guest-email="{{ services.sessionStorageRepository.getSessionValue("guestEmail") }}">
+						        <template #extend-overlay-buttons>
+						            {{ LayoutContainer.show("Ceres::LoginOverlay.ExtendOverlayButtons") }}
+						        </template>
+						        <template #additional-content-after-buttons>
+						            {{ LayoutContainer.show("Ceres::Login.AdditionalContentAfterButtons") }}
+						        </template>
+						    </login-view>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

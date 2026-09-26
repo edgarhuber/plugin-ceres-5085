@@ -1,0 +1,135 @@
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+<header>
+	<div class="navbar-container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-transparent" data-overlay data-aos="fade-in" data-aos-delay="200">
+        <div class="container-max">
+          <div class="col-4 flex-fill px-lg-0 d-flex justify-content-between">
+            <a class="navbar-brand mr-0 " href="/" title="Zur Startseite wechseln" data-aos="fade-in" data-aos-delay="100">
+      				<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" id="Ebene_2" viewBox="0 0 850.23 274.10001" version="1.1" width="850.22998" height="274.10001" style="width: 64px; height: 20px;">
+      				  <polygon id="M-3" class="cls-2" points="547.57,0 486.39,274.1 567.72,274.1 596.16,146.58 624.62,274.1 712,274.1 740.46,146.58 768.92,274.1 850.23,274.1 789.06,0 691.86,0 668.31,105.49 644.77,0 " style="fill:#ffffff;stroke-width:0px"></polygon>
+      				  <path id="_2-8" class="cls-1" d="m 503.38,65.77 -3.12,13.999997 c -2.84,12.73 -10.2,24.000003 -20.7,31.730003 l -107.17,78.84 c -5.84,4.29 -9.92,10.55 -11.5,17.63 l -0.23,1.03 h 110.77 l -14.52,65.1 H 264.85 l 14.32,-64.2 c 3.95,-17.69 14.16,-33.35 28.76,-44.08 L 408.75,91.649997 c 5.84,-4.29 9.92,-10.56 11.5,-17.629997 l 1.36,-6.1 C 423,61.67 418.25,55.74 411.85,55.74 h -8.98 c -4.68,0 -8.74,3.25 -9.76,7.82 l -4.87,21.819997 h -81.3 L 316.56,42.25 C 322.06,17.56 343.96,0 369.26,0 h 81.42 c 34.57,0 60.23,32.03 52.7,65.76 z" style="fill:#0080d2;stroke-width:0px"></path>
+      				  <polygon id="H-0" class="cls-2" points="0,274.1 81.32,274.1 104.7,169.29 177.51,169.29 154.13,274.1 235.45,274.1 296.61,0 215.29,0 189.96,113.55 117.15,113.55 142.48,0 61.16,0 " style="fill:#ffffff;stroke-width:0px"></polygon>
+      				</svg>
+            </a>
+          </div>
+          <div class="d-none d-lg-flex px-lg-0">
+            <div class="py-0">
+              <ul class="navbar-nav" data-aos="fade-in" data-aos-delay="200">
+        				<li class="nav-item dropdown">
+        					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Leistungen</a>
+        					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        						<a class="dropdown-item " href="/leistungen" title="Alle Leistungen ansehen">Alle Leistungen</a>
+        						<div class="dropdown-divider"></div>
+        						<a class="dropdown-item " href="/motoreninstandsetzung" title="Zur Motoreninstandsetzung gehen">Motoreninstandsetzung</a>
+        						<div class="dropdown-divider"></div>
+        						<a class="dropdown-item " href="/lagerschalen-service-bmw" title="Zu unserem Lagerschalen Service gehen">Lagerschalen Service</a>
+        						<div class="dropdown-divider"></div>
+        						<a class="dropdown-item " href="/zylinderkopfueberholung" title="Zu unserer Zylinderkopfüberholung gehen">Zylinderkopfüberholung</a>
+        						<div class="dropdown-divider"></div>
+        						<a class="dropdown-item " href="/vanos-ueberholung-bmw" title="Zu unserer VANOS-Überholung gehen">VANOS-Überholung</a>
+        						<div class="dropdown-divider"></div>
+        						<a class="dropdown-item " href="/steuerkettenwechsel-bmw" title="Steuerkettenwechsel-Seite besuchen">Steuerkettenwechsel</a>
+        					</div>
+        				</li>
+                <li class="nav-item">
+                  <a href="/shop" class="nav-link " title="Shop besuchen">Shop</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/blog" class="nav-link " title="Zum Blog gehen">Blog</a>
+                </li>
+				        <li class="nav-item">
+                  <a href="/ueber-uns" class="nav-link " title="Erfahren Sie mehr über uns">Über uns</a>
+                </li>
+				        <li class="nav-item">
+                  <a href="/kontakt" class="nav-link " title="So erreichen Sie uns">Kontakt</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+      		 <div class="justify-content-end col d-flex flex-fill px-lg-0 text-light" data-aos="fade-in" data-aos-delay="200">
+      		 	<ul class="nav nav-margin-right">
+      		 		<li class="nav-item">
+      		 			<a data-toggle="modal" href="#search-custom" aria-controls="search-custom" class="nav-link p-0" title="Artikel im Shop suchen">
+      		 				<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon">
+      		 					<title>Artikel im Shop suchen</title>
+      		 					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" class="icon-nav">
+      		 						<rect opacity="0" x="0" y="0" width="24" height="24"></rect>
+      		 						<path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#fff" fill-rule="nonzero" opacity="1"></path>
+      		 						<path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#fff" fill-rule="nonzero"></path>
+      		 					</g>
+      		 				</svg>
+      		 			</a>
+      		 		</li>
+      		 		<user-login-handler></user-login-handler>
+      		 		<li class="nav-item pl-3">
+      		 			<a v-toggle-basket-preview href="#" title="Warenkorb öffnen" class="toggle-basket-preview nav-link p-0" {{ set_testing_attr("data-testing", "basket-preview-button") }}>
+      		 				<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon">
+      		 					<title>Warenkorb öffnen</title>
+      		 					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" class="icon-nav">
+      		 						<rect opacity="0" x="0" y="0" width="24" height="24"></rect>
+      		 						<path d="M18.1446364,11.84388 L17.4471627,16.0287218 C17.4463569,16.0335568 17.4455155,16.0383857 17.4446387,16.0432083 C17.345843,16.5865846 16.8252597,16.9469884 16.2818833,16.8481927 L4.91303792,14.7811299 C4.53842737,14.7130189 4.23500006,14.4380834 4.13039941,14.0719812 L2.30560137,7.68518803 C2.28007524,7.59584656 2.26712532,7.50338343 2.26712532,7.4104669 C2.26712532,6.85818215 2.71484057,6.4104669 3.26712532,6.4104669 L16.9929851,6.4104669 L17.606173,3.78251876 C17.7307772,3.24850086 18.2068633,2.87071314 18.7552257,2.87071314 L20.8200821,2.87071314 C21.4717328,2.87071314 22,3.39898039 22,4.05063106 C22,4.70228173 21.4717328,5.23054898 20.8200821,5.23054898 L19.6915238,5.23054898 L18.1446364,11.84388 Z" fill="#fff"></path>
+      		 						<path d="M6.5,21 C5.67157288,21 5,20.3284271 5,19.5 C5,18.6715729 5.67157288,18 6.5,18 C7.32842712,18 8,18.6715729 8,19.5 C8,20.3284271 7.32842712,21 6.5,21 Z M15.5,21 C14.6715729,21 14,20.3284271 14,19.5 C14,18.6715729 14.6715729,18 15.5,18 C16.3284271,18 17,18.6715729 17,19.5 C17,20.3284271 16.3284271,21 15.5,21 Z" fill="#fff"></path>
+      		 					</g>
+      		 				</svg>
+      		 			</a>
+      		 		</li>
+      		 		<li class="nav-item ml-3 d-lg-none">
+      		 			<a v-open-mobile-navigation href="#navigation-fullscreen" title="Menü öffnen">
+      		 				<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon">
+      		 					<title>Menü öffnen</title>
+      		 					<path class="icon-nav" d="M3 17C3 17.5523 3.44772 18 4 18H20C20.5523 18 21 17.5523 21 17V17C21 16.4477 20.5523 16 20 16H4C3.44772 16 3 16.4477 3 17V17ZM3 12C3 12.5523 3.44772 13 4 13H20C20.5523 13 21 12.5523 21 12V12C21 11.4477 20.5523 11 20 11H4C3.44772 11 3 11.4477 3 12V12ZM4 6C3.44772 6 3 6.44772 3 7V7C3 7.55228 3.44772 8 4 8H20C20.5523 8 21 7.55228 21 7V7C21 6.44772 20.5523 6 20 6H4Z" fill="#212529"></path>
+      		 				</svg>
+      		 			</a>
+      		 		</li>
+      		 	</ul>
+      		  </div>
+        </div>
+      </nav>
+    </div>
+</header>
+
+<basket-preview v-if="$store.state.lazyComponent.components['basket-preview']" :show-net-prices="{{ showNetPrices | json_encode }}">
+    <template #before-basket-item>
+        {{ LayoutContainer.show("Ceres::BasketList.BeforeItem") }}
+    </template>
+    <template #after-basket-item>
+        {{ LayoutContainer.show("Ceres::BasketList.AfterItem") }}
+    </template>
+    <template #before-basket-totals>
+        {{ LayoutContainer.show("Ceres::BasketPreview.BeforeBasketTotals") }}
+    </template>
+    <template #before-item-sum>
+        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeItemSum") }}
+    </template>
+    <template #after-item-sum>
+        {{ LayoutContainer.show("Ceres::BasketTotals.AfterItemSum") }}
+    </template>
+    <template #before-shipping-costs>
+        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeShippingCosts") }}
+    </template>
+    <template #after-shipping-costs>
+        {{ LayoutContainer.show("Ceres::BasketTotals.AfterShippingCosts") }}
+    </template>
+    <template #before-total-sum>
+        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeTotalSum") }}
+    </template>
+    <template #before-vat>
+        {{ LayoutContainer.show("Ceres::BasketTotals.BeforeVat") }}
+    </template>
+    <template #after-vat>
+        {{ LayoutContainer.show("Ceres::BasketTotals.AfterVat") }}
+    </template>
+    <template #after-total-sum>
+        {{ LayoutContainer.show("Ceres::BasketTotals.AfterTotalSum") }}
+    </template>
+    <template #after-basket-totals>
+        {{ LayoutContainer.show("Ceres::BasketPreview.AfterBasketTotals") }}
+    </template>
+    <template #before-checkout-button>
+        {{ LayoutContainer.show("Ceres::BasketPreview.BeforeCheckoutButton") }}
+    </template>
+    <template #after-checkout-button>
+        {{ LayoutContainer.show("Ceres::BasketPreview.AfterCheckoutButton") }}
+    </template>
+</basket-preview>

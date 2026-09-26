@@ -1,0 +1,28 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PartialHead %}
+    {% embed getPartial('page-metadata') %}
+        {% block title "404 - Seite nicht gefunden" %}
+    {% endembed %}
+{% endblock %}
+
+{% block PageBody %}
+
+<section class="bg-primary-3 pb-0 first-section-custom overlay-header-start">
+	<img src="https://cdn02.plentymarkets.com/vsl9yvl8vs86/frontend/assets/img/headers/motoreninstandsetzung.jpg" alt="Fehler 404 - Seite nicht gefunden" title="Fehler 404 - Seite nicht gefunden" class="bg-image object-top" data-aos="zoom-out" data-aos-duration="3000">
+	<div class="container-max layer-1">
+		<div class="row my-4 my-md-6 justify-content-center text-center text-light">
+			<div class="col-xl-10 pb-5 pb-md-0">
+				<h1 class="display-3">Fehler 404</h1>
+				<p class="lead mb-4 px-sm-7 px-md-0">Die Seite, die Sie aufgerufen haben, wurde nicht gefunden.</p>
+				<a href="/" title="Zur Startseite gehen" class="btn btn-lg btn-primary">Zur Startseite</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+{% endblock %}
