@@ -16,13 +16,13 @@
     {% if inlineMargin | length > 0 %} style="{{ inlineMargin }}"{% endif %}>
 
     <div class="select-unit required">
-        <div class="form-check" data-validate>
-            <input class="form-check-input privacy-policy-input"
+        <div class="custom-control custom-checkbox mb-4" data-validate>
+            <input class="custom-control-input"
                    type="checkbox"
                    name="{{ formFieldId }}"
                    value="acceptPrivacy"
                    id="{{ formFieldId }}">
-            <label class="form-check-label {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} for="{{ formFieldId }}">
+            <label class="custom-control-label text-small text-muted {% if spacingPadding | length > 0 %} {{ spacingPadding }}{% endif %}" {% if inlinePadding | length > 0 %} style="{{ inlinePadding }}"{% endif %} for="{{ formFieldId }}">
                 {{ Twig.do("autoescape false") }}
                     {{ Twig.do("set policyContent") }}<!--
                     --><a href="{{ Twig.print("urls.privacyPolicy") }}" target="_blank">

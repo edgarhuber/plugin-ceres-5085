@@ -14,9 +14,11 @@
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    
-    <div class="input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="text"{% endif %}>
+
+    <div class="form-group{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="text"{% endif %}>
         <input
+            class="form-control"
+            placeholder="{{ label }}{% if isRequired %}*{% endif %}"
             name="{{ formFieldId }}"
             type="text"
             id="{{ formFieldId }}">

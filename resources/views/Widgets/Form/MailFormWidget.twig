@@ -15,64 +15,77 @@
 {% set customClass     = widget.settings.customClass.mobile %}
 {% set typeForm        = widget.settings.typeForm.mobile %}
 
-<div class="widget widget-contact-form
-    {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
-    {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
-    {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
+<section class="pt-0" id="formular">
+	<div class="container-max">
+		<div class="row justify-content-center">
+			<div class="col-md-8 col-lg-6 d-flex">
+				<div class="card card-body p-1-rem mb-0">
+					<div class="mt-xl-4 mt-3 mx-3 mx-xl-4 mb-3 mb-xl-4">
 
-    <div class="widget-inner">
-        <form class="row" data-form-type="{{ typeForm }}" id="{{ formId }}" method="post" @submit.prevent="$store.dispatch('sendContactForm', $event)">
+            <div class="widget widget-contact-form
+                {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
+                {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
+                {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
-            {{ Twig.if("#{ mailTarget | trim | json_encode } is empty and ceresConfig.contact.shopMail | trim is empty and #{ isPreview | json_encode }") }}
-                <div class="col-12">
-                    <div class="alert alert-danger w-100">
-                        {{ trans("Ceres::Widget.mailFormNoRecipient") }}
-                    </div>
-                </div>
-            {{ Twig.endif() }}
+                <div class="widget-inner">
+                    <form class="row" data-form-type="{{ typeForm }}" id="{{ formId }}" method="post" @submit.prevent="$store.dispatch('sendContactForm', $event)">
 
-            {% if mailTarget is defined and mailTarget | length > 0 %}
-                <input type="hidden" data-mail="recipient" value="{{ mailTarget }}">
-            {% endif %}
-            {% if subject is defined and subject | length > 0 %}
-                <input type="hidden" data-mail="subject" value="{{ subject }}">
-            {% endif %}
-            {% for ccAddress in ccAddresses if ccAddress | length > 0 %}
-                <input type="hidden" data-mail="cc" value="{{ ccAddress }}">
-            {% endfor %}
+                        {{ Twig.if("#{ mailTarget | trim | json_encode } is empty and ceresConfig.contact.shopMail | trim is empty and #{ isPreview | json_encode }") }}
+                            <div class="col-12">
+                                <div class="alert alert-danger w-100">
+                                    {{ trans("Ceres::Widget.mailFormNoRecipient") }}
+                                </div>
+                            </div>
+                        {{ Twig.endif() }}
 
-            {% for bccAddress in bccAddresses if bccAddress | length > 0 %}
-                <input type="hidden" data-mail="bcc" value="{{ bccAddress }}">
-            {% endfor %}
+                        {% if mailTarget is defined and mailTarget | length > 0 %}
+                            <input type="hidden" data-mail="recipient" value="{{ mailTarget }}">
+                        {% endif %}
+                        {% if subject is defined and subject | length > 0 %}
+                            <input type="hidden" data-mail="subject" value="{{ subject }}">
+                        {% endif %}
+                        {% for ccAddress in ccAddresses if ccAddress | length > 0 %}
+                            <input type="hidden" data-mail="cc" value="{{ ccAddress }}">
+                        {% endfor %}
 
-            <div class="col-12 cmp-contact"{% if isPreview %} data-builder-child-container="formFields"{% endif %}>
-                {{ children.formFields | raw }}
-            </div>
+                        {% for bccAddress in bccAddresses if bccAddress | length > 0 %}
+                            <input type="hidden" data-mail="bcc" value="{{ bccAddress }}">
+                        {% endfor %}
 
-            {{ Twig.if("ceresConfig.global.googleRecaptchaApiKey | trim is not empty and #{ typeForm | json_encode } != 'contract-withdrawal'") }}
-                <recaptcha></recaptcha>
-            {{ Twig.endif() }}
+                        <div class="col-12 cmp-contact"{% if isPreview %} data-builder-child-container="formFields"{% endif %}>
+                            {{ children.formFields | raw }}
+                        </div>
 
-            <input
-                id="mail-form-honey_{{ formId }}"
-                class="honey"
-                type="text"
-                name="username"
-                autocomplete="new-password"
-                aria-hidden="true"
-                tabindex="-1">
-            <label class="position-absolute" for="mail-form-honey_{{ formId }}">
-                <span class="visually-hidden">
-                    {{ trans("Ceres::Template.mailFormHoneypotLabel") }}
-                </span>
-            </label>
+                        {{ Twig.if("ceresConfig.global.googleRecaptchaApiKey | trim is not empty and #{ typeForm | json_encode } != 'contract-withdrawal'") }}
+                            <recaptcha></recaptcha>
+                        {{ Twig.endif() }}
 
-            <div class="col-12 text-right">
-                <button type="submit" class="btn-send-contact-form btn btn-{{ appearance }} {{ buttonSize }}" {{ Twig.print('set_testing_attr("data-testing", "send-contact-form")') }}>
-                    {{ labelSubmit | default(trans("Ceres::Template.contactSend")) }}
-                    <i class="fa fa-paper-plane-o ml-2" aria-hidden="true"></i>
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
+                        <input
+                            id="mail-form-honey_{{ formId }}"
+                            class="honey"
+                            type="text"
+                            name="username"
+                            autocomplete="new-password"
+                            aria-hidden="true"
+                            tabindex="-1">
+                        <label class="position-absolute" for="mail-form-honey_{{ formId }}">
+                            <span class="visually-hidden">
+                                {{ trans("Ceres::Template.mailFormHoneypotLabel") }}
+                            </span>
+                        </label>
+
+                        <div class="col-12 text-right">
+                            <button type="submit" class="btn-send-contact-form btn btn-{{ appearance }} {{ buttonSize }}" {{ Twig.print('set_testing_attr("data-testing", "send-contact-form")') }}>
+                                {{ labelSubmit | default(trans("Ceres::Template.contactSend")) }}
+                                <i class="fa fa-paper-plane-o ml-2" aria-hidden="true"></i>
+                            </button>
+      									</div>
+                  </form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

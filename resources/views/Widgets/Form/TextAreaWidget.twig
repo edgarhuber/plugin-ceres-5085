@@ -15,11 +15,13 @@
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
 
-    <div class="input-unit{% if isRequired %} required{% endif %} textarea" {% if isRequired %}data-validate="text"{% endif %}>
+    <div class="form-group{% if isRequired %} required{% endif %} textarea" {% if isRequired %}data-validate="text"{% endif %}>
         <textarea
                 name="{{ formFieldId }}"
+                placeholder="{{ label }}{% if isRequired %}*{% endif %}"
                 id="{{ formFieldId }}"
                 rows="{{ rows }}"
+                class="form-control"
                 {% if fixedHeight %}class="no-resize"{% endif %}>
         </textarea>
 

@@ -16,11 +16,13 @@
     {% if spacingClasses | length > 0 %} {{ spacingClasses }}{% endif %}
     {% if customClass | length > 0 %} {{ customClass }}{% endif %}"
     {% if inlineSpacings | length > 0 %} style="{{ inlineSpacings }}"{% endif %}>
-    
-    <div class="input-unit{% if isRequired %} required{% endif %}{% if allowMailCC %} m-b-0{% endif %}" {% if isRequired %}data-validate="mail"{% endif %}>
+
+    <div class="form-group{% if isRequired %} required{% endif %}{% if allowMailCC %} mb-0{% endif %}" {% if isRequired %}data-validate="mail"{% endif %}>
         <input name="{{ formFieldId }}"
                type="email"
-               id="{{ formFieldId }}">
+               id="{{ formFieldId }}"
+               placeholder="E-Mail*"
+               class="form-control">
 
         <label for="{{ formFieldId }}">
             {{ label }}{% if isRequired %}*{% endif %}
@@ -29,13 +31,13 @@
     </div>
 
     {% if allowMailCC %}
-        <div class="form-check mt-1 mb-2">
-            <input class="form-check-input"
+        <div class="custom-control custom-checkbox mt-2 mb-2">
+            <input class="custom-control-input"
                    data-mail="cc"
                    value="{{ formFieldId }}"
                    type="checkbox"
                    id="{{ uid_check }}">
-            <label class="form-check-label"
+            <label class="custom-control-label text-small text-muted"
                    for="{{ uid_check }}">
                 {{ trans("Ceres::Template.contactSendMeACopy") }}
             </label>

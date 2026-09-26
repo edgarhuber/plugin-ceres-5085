@@ -23,7 +23,7 @@
 
 
     {% if selectType == 'dropdown' %}
-        <div class="input-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate=""{% endif %}>
+        <div class="form-group{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate=""{% endif %}>
             <select class="custom-select"
                     id="{{ formFieldId }}"
                     name="{{ formFieldId }}">
@@ -38,21 +38,21 @@
             </label>
         </div>
     {% else %}
-        <div class="select-unit{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="" data-required-count="{{ requiredCount }}"{% endif %}>
+        <div class="{% if isRequired %} required{% endif %}"{% if isRequired %} data-validate="" data-required-count="{{ requiredCount }}"{% endif %}>
             {% if label %}
                 <label for="{{ formFieldId }}">
                     {{ label }}{% if isRequired %}*{% endif %}
                 </label>
             {% endif %}
-            <div class="m-b-1">
+            <div>
                 {% for i, option in selectOptions %}
-                    <div class="form-check {% if spacingPaddingTB | length > 0 %} {{ spacingPaddingTB }} {% endif %}" {% if inlinePaddingTB | length > 0 %} style="{{ inlinePaddingTB }}"{% endif %}>
-                        <input class="form-check-input"
+                    <div class="custom-control custom-checkbox mb-1 {% if spacingPaddingTB | length > 0 %} {{ spacingPaddingTB }} {% endif %}" {% if inlinePaddingTB | length > 0 %} style="{{ inlinePaddingTB }}"{% endif %}>
+                        <input class="custom-control-input"
                                type="{{ selectType }}"
                                name="{{ formFieldId }}{% if selectType == 'checkbox' %}[]{% endif %}"
                                value="{{ i }}"
                                id="{{ formFieldId }}_{{ i }}">
-                        <label class="form-check-label {% if spacingPaddingLR | length > 0 %} {{ spacingPaddingLR }} {% endif %}" {% if inlinePaddingLR | length > 0 %} style="{{ inlinePaddingLR }}" {% endif %} for="{{ formFieldId }}_{{ i }}">
+                        <label class="custom-control-label {% if spacingPaddingLR | length > 0 %} {{ spacingPaddingLR }} {% endif %}" {% if inlinePaddingLR | length > 0 %} style="{{ inlinePaddingLR }}" {% endif %} for="{{ formFieldId }}_{{ i }}">
                             {{ option }}
                         </label>
                     </div>
