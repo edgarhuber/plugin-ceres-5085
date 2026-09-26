@@ -45,7 +45,7 @@
 
 {% if removeTitleCompanyName is not defined or not removeTitleCompanyName %}
     {% if title | trim is not empty %}
-        {% set title = title ~ " | " %}
+        {% set title = title ~ " - " %}
     {% endif %}
     {% set title = title ~ trans("Ceres::Template.headerCompanyName") %}
 {% endif %}
