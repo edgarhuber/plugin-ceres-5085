@@ -231,7 +231,7 @@
                     </div>
                     <div class="modal-body text-center">
                         <lazy-load component="guarantee-notice-modal">
-                            <guarantee-notice-image src="https://cdn02.plentyone.com/vsl9yvl8vs86/frontend/assets/img/content/guarantee_notice_DE.svg" alt="Ihre gesetzlichen Gewährleistungsrechte"></guarantee-notice-image>
+                            <guarantee-notice-image src="{{ plugin_path('Ceres') }}/images/guarantee_notice/{{ guarantee_notice_svg_filename(lang) }}" alt="{{ trans("Ceres::Template.checkoutGuaranteeNoticeLink") }}"></guarantee-notice-image>
                         </lazy-load>
                     </div>
                 </div>

@@ -204,6 +204,10 @@
                           </div>
                         </div>
 
+                        <div class="card card-body border-0 mb-0">
+                          <img src="https://cdn02.plentyone.com/vsl9yvl8vs86/frontend/assets/img/content/guarantee_notice_DE.svg" alt="Ihre gesetzlichen Gewährleistungsrechte">
+                        </div>
+
                         <div class="card card-body border-0 mb-0" v-stick-in-parent="$store.state.basket.isBasketInitiallyLoaded">
                             <aside class="sidebar">
                                 <div class="cmp cmp-checkout-sidebar mb-5">
@@ -240,9 +244,7 @@
 
                             {{ LayoutContainer.show("Ceres::Checkout.BeforePlaceOrder") }}
                             <place-order target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}{% if services.checkout.getReadOnlyCheckout() == 1 %}?readonlyCheckout=1{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
-                            <div class="widget widget-guarantee-notice widget-primary">
-                              <div class="text-center mt-2"><a href="#guarantee-notice-modal" data-toggle="modal" class="text-appearance">Ihre gesetzlichen Gewährleistungsrechte</a></div>
-                            </div>
+                            <guarantee-notice></guarantee-notice>
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
 
                             {% if checkout.readOnly %}
