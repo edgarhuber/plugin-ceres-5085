@@ -240,7 +240,9 @@
 
                             {{ LayoutContainer.show("Ceres::Checkout.BeforePlaceOrder") }}
                             <place-order target-continue="{{ homepageURL }}{% if homepageURL | last != '/'%}/{% endif %}place-order{% if urls.appendTrailingSlash %}/{% endif %}{% if services.checkout.getReadOnlyCheckout() == 1 %}?readonlyCheckout=1{% endif %}" @payment-response="checkoutComp.showModal($event)"></place-order>
-                            <guarantee-notice></guarantee-notice>
+                            <div class="widget widget-guarantee-notice widget-primary">
+                              <div class="text-center mt-2"><a href="#guarantee-notice-modal" data-toggle="modal" class="text-appearance">Ihre gesetzlichen Gewährleistungsrechte</a></div>
+                            </div>
                             {{ LayoutContainer.show("Ceres::Checkout.AfterPlaceOrder") }}
 
                             {% if checkout.readOnly %}
